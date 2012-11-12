@@ -1,0 +1,5 @@
+// zla sygnatura main (zly typ zwracany)
+
+boolean main(int arg) {
+  return 0;
+}

@@ -1,0 +1,7 @@
+// return void w funkcji zwracajacej wartosc
+int main() {
+        if (true)
+                return;
+	;
+        return 1;
+}

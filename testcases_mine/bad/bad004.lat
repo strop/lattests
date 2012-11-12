@@ -1,0 +1,9 @@
+// powtarzajaca sie nazwa argumentu funkcji (ten sam typ)
+
+int main() {
+  return 0;
+}
+
+int f(int arg, int arg) {
+  return 0;
+}

@@ -1,0 +1,5 @@
+// zarezerwowany identyfikator
+int main() {
+  int printString;
+  return 5;
+}

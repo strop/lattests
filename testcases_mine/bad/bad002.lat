@@ -1,0 +1,5 @@
+// zla sygnatura main (argument)
+
+int main(int arg) {
+  return 0;
+}

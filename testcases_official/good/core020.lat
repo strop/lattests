@@ -1,0 +1,9 @@
+// funkcja zwracajaca void moze nie miec return
+
+int main() {
+    p();
+    printInt(1);
+    return 0;
+}
+
+void p() {}

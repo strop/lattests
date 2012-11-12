@@ -1,0 +1,4 @@
+// return zlego typu
+int main() {
+     return true;
+}

@@ -1,0 +1,9 @@
+// bardzo trikowy test z zakresami zmiennych
+
+int main() {
+  boolean i;
+  {
+    int i = i + 7; // powinno sie wysypac, bo "i" po prawej stronie jest zewnetrznym i typu bool
+  }
+  return 0;
+}
