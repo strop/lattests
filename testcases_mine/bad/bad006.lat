@@ -1,4 +1,4 @@
-// bardzo trikowy test z zakresami zmiennych
+// nietrywialny test z zakresami zmiennych
 
 int main() {
   boolean i;

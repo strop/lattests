@@ -1,3 +1,5 @@
+// dwie dobre deklaracje main
+
 int main() {
   return 0;
 }
