@@ -1,4 +1,4 @@
-// zarezerwowany identyfikator - kontrowersyjne :3
+// zarezerwowany identyfikator
 int main() {
   int printString;
   return 5;
