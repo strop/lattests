@@ -1,0 +1,6 @@
+// duzo unarnych minusow
+int main() {
+  int i1, i2;
+  ----i1;
+  return 0;
+}

@@ -1,0 +1,9 @@
+//
+int main() {
+  int i = 6;
+  int j = 7;
+  int k = 8;
+  
+  i+(j+k);
+    return 0;
+}

@@ -1,0 +1,12 @@
+// dodawanie literalow stringowych
+int main() {
+  string s1 = 
+  "aaaaa"
+  
+  
+  ;
+  "abc" + "bca";
+  s1 + "aaaa";
+  "aasssdf" + s1;
+  return 0;
+}

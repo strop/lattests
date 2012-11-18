@@ -1,0 +1,6 @@
+// odejmowanie
+int main() {
+  int i1=-2, i2=2;
+  i1 - i2;
+  return 0;
+}

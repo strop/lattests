@@ -1,0 +1,9 @@
+// or
+int main() {
+  boolean b1;
+  boolean b2, b3;
+  
+  b1 = b2 ||b3;
+  
+  return 0;
+}

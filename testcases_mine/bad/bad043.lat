@@ -1,0 +1,14 @@
+//
+int main() {
+  int i1, i2;
+  string s1, s2;
+  boolean b1, b2;
+  
+  b1++;
+  
+  return 0;
+}
+
+void v1(){}
+
+void v2(){}

@@ -1,0 +1,5 @@
+//
+int main() {
+  "litaral stringowy z wyeskejpowanym cudzyslowem -> \"";
+  return 0;
+}

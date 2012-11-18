@@ -1,0 +1,4 @@
+// nie ma returna, ale jest error - dobrze
+int main() {
+  error();
+}

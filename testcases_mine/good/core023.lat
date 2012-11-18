@@ -1,0 +1,5 @@
+// literal stringowy z tabem
+int main() {
+  "literal	stringowy	z 	tabami		";
+  return 0;
+}

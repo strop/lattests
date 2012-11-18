@@ -1,0 +1,23 @@
+// porownania
+int main() {
+  int i1,i2;
+  boolean b1;
+  string s1, s2;
+  boolean b2;
+  
+  i1 < i2;
+  i1 > i2;
+  i1 <= i2; 
+  i1 >= i2;
+  
+  i1 == i2;
+  i1 != i2;
+  
+  s1 == s2;
+  s1 != s2;
+   
+  b1 == b2;
+  b1 != b2;
+  
+  return 0;
+}

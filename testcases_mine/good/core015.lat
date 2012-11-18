@@ -1,0 +1,6 @@
+// dekrementacja
+int main() {
+  int y;
+  y--;
+  return 0;
+}

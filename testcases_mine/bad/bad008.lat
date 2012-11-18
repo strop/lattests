@@ -1,0 +1,6 @@
+// 27
+// deklaracja zmiennej typu void
+int main() {
+  void x;
+  return 0;
+}

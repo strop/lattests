@@ -1,0 +1,22 @@
+// operacje
+
+int main() {
+  int i1, i2;
+  string s1, s2;
+  boolean b1, b2;
+
+  i1 + i2;
+  i1 - i2;
+  i1 * i2;
+  i1 / i2;
+  i1 % i2;
+  -i1;
+
+  s1 + s2;
+
+  b1 || b2;
+  b1 && b2;
+  !b1;
+  
+  return 0;
+}

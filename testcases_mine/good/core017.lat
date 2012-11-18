@@ -1,0 +1,19 @@
+// dzielenie całkowite + każdy leksem w nowej linii
+int
+main
+(
+)
+{
+int
+i1
+,
+i2
+;
+i1
+/
+i2
+;
+return
+0
+;
+}

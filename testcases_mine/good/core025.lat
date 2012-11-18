@@ -1,0 +1,5 @@
+// literaly stringowe
+int main() {
+  "stringliteralbezspacji";
+  return 0;
+}

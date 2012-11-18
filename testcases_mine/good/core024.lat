@@ -1,0 +1,5 @@
+// literal stringowy ze spacjami
+int main() {
+  "literal ze spacjami";
+  return 0;
+}
