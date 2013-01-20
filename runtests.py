@@ -5,8 +5,10 @@ import subprocess as subp
 
 pass_on_success = "pass_on_success"
 pass_on_error = "pass_on_error"
+java = "java"
+x86 = "x86"
 
-def run(test_section_title, testdir, subdir, test_pass_type, print_compiler_output = True, run_io_phase = True):
+def run(test_section_title, testdir, subdir, test_pass_type, print_compiler_output = True, run_io_phase = True, backend = x86):
   test_count = 0
   success_count = 0
   failed_test_files = []
@@ -14,10 +16,11 @@ def run(test_section_title, testdir, subdir, test_pass_type, print_compiler_outp
   print "======="
   print test_section_title
   print "======="
+  print testdir,subdir
   for folder in os.walk(testdir + subdir):
     print "Folder:",folder[0]
     if len(folder[2]) > 0:
-      tests = sorted(list(set([x[0] for x in map(lambda x: x.split("."), folder[2])])))
+      tests = sorted(list(set([x[0] for x in map(lambda x: x.split("."), filter(lambda x: x != "a.out", folder[2]))])))
       for t in tests:
         io_phase_succeeded = True
         compilation_phase_succeeded = False
@@ -25,10 +28,12 @@ def run(test_section_title, testdir, subdir, test_pass_type, print_compiler_outp
         test_file = t + config.suffix_src
         input_file = t + config.suffix_in
         output_file = t + config.suffix_out
-        test_src_path = folder[0] + test_file
-        test_bin_path = config.test_bin_dir + "/" + t
-        test_input_path = folder[0] + "/" + input_file
-        test_output_path = folder[0] + "/" + output_file
+        class_file = t + ".class"
+        test_src_path = folder[0] +"/"+ test_file
+        test_bin_path = config.test_bin_dir + t
+        test_class_path = folder[0] +"/"+ class_file
+        test_input_path = folder[0] +"/"+ input_file
+        test_output_path = folder[0] +"/"+ output_file
 
         compiler_stdout = ""
         compiler_stderr = ""
@@ -41,7 +46,7 @@ def run(test_section_title, testdir, subdir, test_pass_type, print_compiler_outp
         else:
           compile_out = ""
           try:
-            compiler_process = subp.Popen([config.compiler_bin, test_src_path], stdout = subp.PIPE, stderr = subp.PIPE)
+            compiler_process = subp.Popen([config.compiler_dir + config.compiler_bin, test_src_path], stdout = subp.PIPE, stderr = subp.PIPE)
             (compiler_stdout, compiler_stderr) = compiler_process.communicate()
             stderr_lines = compiler_stderr.splitlines()
 
@@ -67,11 +72,38 @@ def run(test_section_title, testdir, subdir, test_pass_type, print_compiler_outp
           except OSError as ose:
             test_info.append("OSError")
             test_info.append(str(ose))
-        # sprawdzanie i/o
-        if os.path.exists(test_input_path) and run_io_phase:
-          if not os.path.exists(test_output_path):
+        # sprawdzanie i/o java
+        if backend == java:
+          if os.path.exists(test_input_path) and (not os.path.exists(test_output_path)):
             print "Blad: nie istnieje plik wynikowy dla pliku wejsciowego", input_file
-            output = subp.check_output("test_bin_path" + " < " + test_input_path, shell=True)
+          if os.path.exists(test_output_path) and run_io_phase and (test_pass_type == pass_on_success):
+            output = ""
+            try:
+              output = subp.check_output("java -cp " + folder[0]+":"+ config.compiler_dir+config.lib_dir+ " " + t + ((" < " + test_input_path) if os.path.exists(test_input_path) else ""), shell=True)
+            except:
+              test_info.append("Wyjatek w trakcie wykonywania skompilowanego programu java")
+            expected_output = file(test_output_path).read()
+            if output != expected_output:
+              print "I/O TEST FAILED"
+              print "oczekiwano:"
+              print expected_output
+              print "otrzymano:"
+              print output
+              io_phase_succeeded = False
+            else:
+              io_phase_succeeded = True
+
+        # sprawdzanie i/o x86
+        if backend == x86:
+          if os.path.exists(test_input_path) and (not os.path.exists(test_output_path)):
+            print "Blad: nie istnieje plik wynikowy dla pliku wejsciowego", input_file
+          if os.path.exists(test_output_path) and run_io_phase and (test_pass_type == pass_on_success):
+            output = ""
+            try:
+              output = subp.check_output(folder[0]+"/"+t+".out" + ((" < " + test_input_path) if os.path.exists(test_input_path) else ""), shell=True)
+            except:
+              test_info.append("Wyjatek w trakcie wykonywania skompilowanego programu x86")
+              #test_info.append(str(exception))
             expected_output = file(test_output_path).read()
             if output != expected_output:
               print "I/O TEST FAILED"
@@ -104,6 +136,9 @@ def print_results():
   print success_count,"/",test_count,"zaliczonych testow"
   
 test_runs = [
+ ("MINE EXT GOOD", config.my_testdir, config.ext_dir+config.good_dir, pass_on_success),
+ ("MINE EXT BAD", config.my_testdir, config.ext_dir+config.bad_dir, pass_on_error),
+ ("OFFICIAL EXT", config.official_testdir, config.ext_dir, pass_on_success),
  ("OFFICIAL GOOD", config.official_testdir, config.good_dir, pass_on_success),
  ("OFFICIAL BAD", config.official_testdir, config.bad_dir, pass_on_error),
  ("JACEK GOOD", config.jackowy_testdir, config.good_dir, pass_on_success),
